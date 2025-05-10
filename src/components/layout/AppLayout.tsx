@@ -5,6 +5,7 @@ import { Sidebar, SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "./AppSidebar";
 import Header from "./Header";
 import { ThemeProvider } from "../ThemeProvider";
+import WelcomeDialog from "../welcome/WelcomeDialog";
 
 export default function AppLayout() {
   const [isMounted, setIsMounted] = useState(false);
@@ -28,6 +29,7 @@ export default function AppLayout() {
               <Outlet />
             </main>
           </div>
+          <WelcomeDialog />
         </div>
       </SidebarProvider>
     </ThemeProvider>
