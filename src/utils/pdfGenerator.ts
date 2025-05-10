@@ -1,6 +1,6 @@
 
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { jsPDF } from 'jspdf'; // Fixed import statement - jsPDF is a named export
 
 export const saveAsImage = async (elementId: string, filename: string = 'invoice.png'): Promise<string> => {
   const element = document.getElementById(elementId);
