@@ -14,6 +14,7 @@ import CreateInvoicePage from "./pages/CreateInvoicePage";
 import InvoicesPage from "./pages/InvoicesPage";
 import InvoiceDetailPage from "./pages/InvoiceDetailPage";
 import HistoryPage from "./pages/HistoryPage";
+import AnalyticsPage from "./pages/AnalyticsPage";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="invoices" element={<InvoicesPage />} />
               <Route path="invoices/:invoiceId" element={<InvoiceDetailPage />} />
               <Route path="history" element={<HistoryPage />} />
+              <Route path="analytics" element={<AnalyticsPage />} />
               <Route path="settings" element={<ProfilePage />} />
             </Route>
             <Route path="*" element={<NotFound />} />
