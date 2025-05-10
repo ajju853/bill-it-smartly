@@ -10,7 +10,7 @@ import {
 } from "recharts";
 import { format, subDays, subMonths, startOfMonth, endOfMonth, isAfter, isBefore } from "date-fns";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 import { getInvoices, Invoice } from "@/lib/storage";
 import { CalendarDays, Calendar, ArrowUpDown } from "lucide-react";
 
@@ -29,6 +29,31 @@ interface CategoryData {
   value: number;
   count: number;
 }
+
+// Custom component for tooltip content
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (!active || !payload || !payload.length) return null;
+  
+  return (
+    <div className="grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl">
+      <div className="font-medium">{`Date: ${label}`}</div>
+      {payload.map((entry: any, index: number) => (
+        <div key={`item-${index}`} className="flex w-full items-center gap-2">
+          <div 
+            className="h-2.5 w-2.5 shrink-0 rounded-[2px]"
+            style={{ backgroundColor: entry.color }}
+          />
+          <div className="flex flex-1 justify-between items-center leading-none">
+            <span className="text-muted-foreground">{entry.name}</span>
+            <span className="font-mono font-medium tabular-nums text-foreground">
+              ₹{entry.value.toFixed(2)}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default function AnalyticsPage() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
@@ -306,15 +331,7 @@ export default function AnalyticsPage() {
                           tick={{ fontSize: 12 }}
                           tickFormatter={(value) => `₹${value}`}
                         />
-                        <ChartTooltip
-                          content={(props) => (
-                            <ChartTooltipContent
-                              {...props}
-                              formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Revenue']}
-                              labelFormatter={(label) => `Date: ${label}`}
-                            />
-                          )}
-                        />
+                        <Tooltip content={<CustomTooltip />} />
                         <Bar 
                           dataKey="total" 
                           name="Revenue" 
@@ -340,15 +357,7 @@ export default function AnalyticsPage() {
                           tick={{ fontSize: 12 }}
                           tickFormatter={(value) => `₹${value}`}
                         />
-                        <ChartTooltip
-                          content={(props) => (
-                            <ChartTooltipContent
-                              {...props}
-                              formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Revenue']}
-                              labelFormatter={(label) => `Date: ${label}`}
-                            />
-                          )}
-                        />
+                        <Tooltip content={<CustomTooltip />} />
                         <Line 
                           type="monotone" 
                           dataKey="total" 
@@ -396,7 +405,9 @@ export default function AnalyticsPage() {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Revenue']} />
+                    <Tooltip 
+                      formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Revenue']} 
+                    />
                     <Legend />
                   </PieChart>
                 </ResponsiveContainer>
