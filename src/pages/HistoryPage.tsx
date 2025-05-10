@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -267,7 +266,7 @@ export default function HistoryPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">${totalRevenue.toFixed(2)}</div>
+                <div className="text-2xl font-bold">₹{totalRevenue.toFixed(2)}</div>
                 <p className="text-xs text-muted-foreground">
                   From {totalInvoices} invoice{totalInvoices !== 1 ? 's' : ''}
                 </p>
@@ -299,10 +298,10 @@ export default function HistoryPage() {
                       />
                       <YAxis 
                         tick={{ fontSize: 12 }}
-                        tickFormatter={(value) => `$${value}`}
+                        tickFormatter={(value) => `₹${value}`}
                       />
                       <Tooltip
-                        formatter={(value: number) => [`$${value.toFixed(2)}`, 'Revenue']}
+                        formatter={(value: number) => [`₹${value.toFixed(2)}`, 'Revenue']}
                         labelFormatter={(label) => `Month: ${label}`}
                       />
                       <Line 
@@ -341,12 +340,12 @@ export default function HistoryPage() {
                           </div>
                           <div className="flex justify-between mt-1">
                             <span className="text-muted-foreground">Total:</span>
-                            <span className="font-medium">${type.total.toFixed(2)}</span>
+                            <span className="font-medium">₹{type.total.toFixed(2)}</span>
                           </div>
                           <div className="flex justify-between mt-1">
                             <span className="text-muted-foreground">Average:</span>
                             <span className="font-medium">
-                              ${type.count > 0 ? (type.total / type.count).toFixed(2) : '0.00'}
+                              ₹{type.count > 0 ? (type.total / type.count).toFixed(2) : '0.00'}
                             </span>
                           </div>
                         </div>

@@ -81,7 +81,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${totalAmount.toFixed(2)}
+              ₹{totalAmount.toFixed(2)}
             </div>
             <p className="text-xs text-muted-foreground">
               {totalAmount === 0 ? 'No revenue recorded' : 'Total from all invoices'}
@@ -95,7 +95,7 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              ${invoiceCount > 0 ? (totalAmount / invoiceCount).toFixed(2) : '0.00'}
+              ₹{invoiceCount > 0 ? (totalAmount / invoiceCount).toFixed(2) : '0.00'}
             </div>
             <p className="text-xs text-muted-foreground">
               {invoiceCount === 0 ? 'No invoices to calculate average' : 'Average invoice amount'}
@@ -135,7 +135,7 @@ export default function Dashboard() {
                     </span>
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="font-medium">${invoice.total.toFixed(2)}</span>
+                    <span className="font-medium">₹{invoice.total.toFixed(2)}</span>
                     <Button
                       variant="ghost"
                       size="sm"

@@ -69,23 +69,23 @@ export default function TotalCalculator({
         <div className="space-y-2">
           <div className="flex justify-between py-2">
             <span className="text-muted-foreground">Subtotal:</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>₹{subtotal.toFixed(2)}</span>
           </div>
           {tax > 0 && (
             <div className="flex justify-between py-2">
               <span className="text-muted-foreground">Tax ({tax}%):</span>
-              <span>${taxAmount.toFixed(2)}</span>
+              <span>₹{taxAmount.toFixed(2)}</span>
             </div>
           )}
           {discount > 0 && (
             <div className="flex justify-between py-2">
               <span className="text-muted-foreground">Discount ({discount}%):</span>
-              <span>-${discountAmount.toFixed(2)}</span>
+              <span>-₹{discountAmount.toFixed(2)}</span>
             </div>
           )}
           <div className="flex justify-between py-2 text-lg font-semibold">
             <span>Total:</span>
-            <span>${total.toFixed(2)}</span>
+            <span>₹{total.toFixed(2)}</span>
           </div>
         </div>
       </CardContent>

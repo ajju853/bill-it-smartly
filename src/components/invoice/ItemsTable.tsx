@@ -109,7 +109,7 @@ export default function ItemsTable({
                     />
                   </TableCell>
                   <TableCell className="text-right font-medium">
-                    ${item.amount.toFixed(2)}
+                    ₹{item.amount.toFixed(2)}
                   </TableCell>
                   <TableCell>
                     <Button
@@ -139,7 +139,7 @@ export default function ItemsTable({
           <div className="flex justify-between w-full md:w-72">
             <span className="text-muted-foreground">Subtotal:</span>
             <span className="font-medium">
-              ${items.reduce((sum, item) => sum + item.amount, 0).toFixed(2)}
+              ₹{items.reduce((sum, item) => sum + item.amount, 0).toFixed(2)}
             </span>
           </div>
         </div>

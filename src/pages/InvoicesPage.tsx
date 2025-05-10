@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "@/components/ui/card";
@@ -86,7 +85,7 @@ export default function InvoicesPage() {
   
   // Format currency
   const formatCurrency = (amount: number): string => {
-    return `$${amount.toFixed(2)}`;
+    return `₹${amount.toFixed(2)}`;
   };
   
   // Delete invoice

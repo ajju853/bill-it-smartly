@@ -117,8 +117,8 @@ export default function InvoicePreview({ invoice, userProfile }: InvoicePreviewP
                 <tr key={item.id} className="invoice-item-row">
                   <td className="py-3 px-1">{item.name}</td>
                   <td className="py-3 px-1 text-right">{item.quantity}</td>
-                  <td className="py-3 px-1 text-right">${item.unitPrice.toFixed(2)}</td>
-                  <td className="py-3 px-1 text-right">${item.amount.toFixed(2)}</td>
+                  <td className="py-3 px-1 text-right">₹{item.unitPrice.toFixed(2)}</td>
+                  <td className="py-3 px-1 text-right">₹{item.amount.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -130,26 +130,26 @@ export default function InvoicePreview({ invoice, userProfile }: InvoicePreviewP
           <div className="w-64">
             <div className="flex justify-between py-1">
               <span className="font-medium">Subtotal:</span>
-              <span>${invoice.subtotal.toFixed(2)}</span>
+              <span>₹{invoice.subtotal.toFixed(2)}</span>
             </div>
             
             {invoice.tax > 0 && (
               <div className="flex justify-between py-1">
                 <span className="font-medium">Tax ({invoice.tax}%):</span>
-                <span>${invoice.taxAmount?.toFixed(2)}</span>
+                <span>₹{invoice.taxAmount?.toFixed(2)}</span>
               </div>
             )}
             
             {invoice.discount > 0 && (
               <div className="flex justify-between py-1">
                 <span className="font-medium">Discount ({invoice.discount}%):</span>
-                <span>-${invoice.discountAmount?.toFixed(2)}</span>
+                <span>-₹{invoice.discountAmount?.toFixed(2)}</span>
               </div>
             )}
             
             <div className="flex justify-between py-2 border-t mt-2 font-bold">
               <span>Total:</span>
-              <span>${invoice.total.toFixed(2)}</span>
+              <span>₹{invoice.total.toFixed(2)}</span>
             </div>
           </div>
         </div>
