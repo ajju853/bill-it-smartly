@@ -25,7 +25,8 @@ import { getUserProfile } from "@/lib/storage";
 import type { UserProfile } from "@/lib/storage";
 
 export default function AppSidebar() {
-  const { collapsed } = useSidebar();
+  // Fix the sidebar context access
+  const sidebar = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
@@ -42,12 +43,13 @@ export default function AppSidebar() {
       : "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all hover:bg-muted";
 
   return (
-    <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible>
-      <SidebarTrigger className="m-2 self-end md:hidden" />
+    <Sidebar className={sidebar.isOpen ? "w-64" : "w-16"} collapsible>
+      <SidebarTrigger className="m-2 self-end md:hidden" variant="icon">
+      </SidebarTrigger>
       
       <SidebarContent>
         {userProfile ? (
-          <div className={`${collapsed ? 'px-2 py-4' : 'px-4 py-6'} flex items-center gap-2`}>
+          <div className={`${sidebar.isOpen ? 'px-4 py-6' : 'px-2 py-4'} flex items-center gap-2`}>
             {userProfile.logo ? (
               <img 
                 src={userProfile.logo} 
@@ -59,7 +61,7 @@ export default function AppSidebar() {
                 {userProfile.name.charAt(0)}
               </div>
             )}
-            {!collapsed && (
+            {sidebar.isOpen && (
               <div className="overflow-hidden">
                 <p className="font-semibold truncate">{userProfile.businessName || userProfile.name}</p>
                 <p className="text-xs text-muted-foreground truncate">{userProfile.email}</p>
@@ -67,7 +69,7 @@ export default function AppSidebar() {
             )}
           </div>
         ) : (
-          <div className={`${collapsed ? 'px-2 py-4' : 'px-4 py-6'}`}>
+          <div className={`${sidebar.isOpen ? 'px-4 py-6' : 'px-2 py-4'}`}>
             <div className="w-10 h-10 rounded-full bg-muted"></div>
           </div>
         )}
@@ -79,7 +81,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <NavLink to="/" className={getNavCls}>
                     <Home className="h-4 w-4" />
-                    {!collapsed && <span>Dashboard</span>}
+                    {sidebar.isOpen && <span>Dashboard</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -88,7 +90,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <NavLink to="/profile" className={getNavCls}>
                     <User className="h-4 w-4" />
-                    {!collapsed && <span>Profile</span>}
+                    {sidebar.isOpen && <span>Profile</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -97,7 +99,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <NavLink to="/create-invoice" className={getNavCls}>
                     <CreditCard className="h-4 w-4" />
-                    {!collapsed && <span>Create Invoice</span>}
+                    {sidebar.isOpen && <span>Create Invoice</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -106,7 +108,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <NavLink to="/invoices" className={getNavCls}>
                     <FileText className="h-4 w-4" />
-                    {!collapsed && <span>Invoices</span>}
+                    {sidebar.isOpen && <span>Invoices</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -115,7 +117,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <NavLink to="/history" className={getNavCls}>
                     <Clock className="h-4 w-4" />
-                    {!collapsed && <span>History</span>}
+                    {sidebar.isOpen && <span>History</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -124,7 +126,7 @@ export default function AppSidebar() {
                 <SidebarMenuButton asChild>
                   <NavLink to="/settings" className={getNavCls}>
                     <Settings className="h-4 w-4" />
-                    {!collapsed && <span>Settings</span>}
+                    {sidebar.isOpen && <span>Settings</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
